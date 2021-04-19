@@ -1,14 +1,12 @@
-#include "sort.cpp"
+#include "queue.hpp"
+#include <iostream>
 
 using namespace ads;
 
 int main()
 {
-    const int n=10, p=90, q=10;
-    int t[n];
-    create(t, n, p, q);
-    print(t, n);
-    merge(t, 0, n-1);
-    print(t, n);
+    ads::Queue<int> test;
+    test.push_back(1);
+    std::cout << test.pop();
     return 0;
 }
