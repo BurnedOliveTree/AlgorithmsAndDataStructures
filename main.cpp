@@ -5,10 +5,6 @@
 #define PRECISION 0.00001
 
 namespace ads {
-    inline int array_size(int t[]) {
-        return sizeof(t) / sizeof(t[0]);
-    }
-
     void swap(int &a, int &b)
     {
         int x = a;
@@ -46,11 +42,9 @@ namespace ads {
         return x;
     }
 
-    int max(int t[], int n=0)
+    int max(int t[], int n)
     // n is the size of array t
     {
-        if (n == 0)
-            n = array_size(t);
         int m=-256;
         for (int i=0; i<n; ++i)
             if (t[i] > m)
@@ -58,11 +52,9 @@ namespace ads {
         return m;
     }
 
-    int min(int t[], int n=0)
+    int min(int t[], int n)
     // n is the size of array t
     {
-        if (n == 0)
-            n = array_size(t);
         int m = INF_MIN;
         for (int i = 0; i < n; ++i)
             if (t[i] < m)
@@ -73,8 +65,6 @@ namespace ads {
     int min_max(int t[], int n, int &M, int &m)
     // n is the size of array t
     {
-        if (n == 0)
-            n = array_size(t);
         M = INF_MIN;
         m = INF_MAX;
         for (int i=0; i<n; i++)
@@ -385,6 +375,7 @@ namespace ads {
 
 int main()
 {
-    std::cout << ads::U1_to_dec("1110") << std::endl;
+    int t[4] = {3, 45, 2, 4};
+    std::cout << ads::max(t, 4) << std::endl;
     return 0;
 }
