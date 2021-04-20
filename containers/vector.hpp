@@ -4,9 +4,11 @@
 #include <ostream>
 #include <sstream>
 
+#include "container.hpp"
+
 namespace ads {
     template <class T>
-    class Vector {
+    class Vector: public Container<T> {
         unsigned long _size;
         unsigned long _max_size;
         T* data;
