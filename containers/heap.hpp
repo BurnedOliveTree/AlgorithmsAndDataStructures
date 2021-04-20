@@ -6,19 +6,21 @@
 
 namespace ads {
     template <class T>
-    class Heap {
-        Vector<T> _data;
-        unsigned long _size;
+    class Heap: public Vector<T> {
+        using Vector<T>::_data;
+        using Vector<T>::_size;
         unsigned long _child_amount;  // amount of direct children in a single node
+        Heap() {}
+        using Vector<T>::pop_front;
+        using Vector<T>::pop_back;
     public:
         Heap(unsigned long child_amount) {
             _size = 0;
             _child_amount = child_amount;
         }
-        void append(T value) {
+        void push_back(T new_element) {
             unsigned long i = _size;
-            _size += 1;
-            _data.push_back(value);
+            Vector<T>::push_back(new_element);
             while (i > 0 && _data[i] < _data[i / _child_amount]) {
                 swap(_data[i], _data[i / _child_amount]);
                 i = i / _child_amount;
@@ -43,11 +45,6 @@ namespace ads {
                 }
                 else
                     return true;
-        }
-        friend std::ostream& operator<< (std::ostream& myStream, const Heap<T>& myHeap) {
-            for (unsigned long i=0; i<myHeap._size; ++i)
-                myStream << myHeap._data[i] << ", ";
-            return myStream;
         }
     };
 }
