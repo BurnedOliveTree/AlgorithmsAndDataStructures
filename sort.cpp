@@ -1,7 +1,7 @@
 #include <iostream>
 #include <stdlib.h>
 #include <time.h>
-#include "math.cpp"
+#include "math.hpp"
 
 // sorting algorithms of integer arrays
 

@@ -5,9 +5,10 @@
 #define PRECISION 0.00001
 
 namespace ads {
-    void swap(int &a, int &b)
+    template <class T>
+    void swap(T& a, T& b)
     {
-        int x = a;
+        T x = a;
         a = b;
         b = x;
     }
