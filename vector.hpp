@@ -2,6 +2,7 @@
 #define ads_vector_hpp
 
 #include <ostream>
+#include <sstream>
 
 namespace ads {
     template <class T>
@@ -36,16 +37,42 @@ namespace ads {
         ~Vector() {
             delete[] data;
         };
-        unsigned long size() {
+        unsigned long size() const {
         /// returns amount of elements in vector
             return _size;
         }
-        bool isEmpty() {
+        bool empty() const {
         /// returns true if there aren't any elements in vector
             if (_size == 0)
                 return true;
             else
                 return false;
+        }
+        bool compare(const Vector<T>& myVector) const {
+        /// compares this vector's content with another given vector
+            if (this->_size != myVector._size)
+                return false;
+            for (int i=0; i<this->_size; ++i)
+                if (this->data[i] != myVector.data[i])
+                    return false;
+            return true;
+        }
+        T& at(unsigned long index) const {
+        /// returns a reference to a desired element of the vector
+            if (index < 0 or index >= _size) {
+                std::ostringstream error_msg;
+                error_msg << "called at(" << index << ") on a vector of size " << _size;
+                throw std::out_of_range(error_msg.str());
+            }
+            return data[index];
+        }
+        T& front() const {
+        /// returns a reference to the first element of the vector
+            return data[0];
+        }
+        T& back() const {
+        /// returns a reference to the last element of the vector
+            return data[_size-1];
         }
         void push_back(T new_element) {
         /// adds an element at the end of the vector
@@ -54,9 +81,9 @@ namespace ads {
             data[_size] = new_element;
             _size++;
         }
-        T pop() {
+        T pop_front() {
         /// returns and removes the first element of the vector
-            if (isEmpty())
+            if (empty())
                 throw std::out_of_range("called pop() when vector is empty");
             T temp = data[0];
             moveData();
@@ -67,7 +94,7 @@ namespace ads {
         }
         T pop_back() {
         /// returns and removes the last element of the vector
-            if (isEmpty())
+            if (empty())
                 throw std::out_of_range("called pop_back() when vector is empty");
             T temp = data[_size-1];
             _size--;
@@ -75,25 +102,14 @@ namespace ads {
                 changeDataSize(0);
             return temp;
         }
-        T& operator[](unsigned long index)
-        {
-            return data[index];
+        T& operator[](unsigned long index) const {
+            return this->at(index);
         }
-        bool operator== (const Vector<T>& myVector) {
-            if (this->_size != myVector._size)
-                return false;
-            for (int i=0; i<this->_size; ++i)
-                if (this->data[i] != myVector.data[i])
-                    return false;
-            return true;
+        bool operator== (const Vector<T>& myVector) const {
+            return this->compare(myVector);
         }
-        bool operator!= (const Vector<T>& myVector) {
-            if (this->_size != myVector._size)
-                return true;
-            for (int i=0; i<this->_size; ++i)
-                if (this->data[i] != myVector.data[i])
-                    return true;
-            return false;
+        bool operator!= (const Vector<T>& myVector) const {
+            return !this->compare(myVector);
         }
         friend std::ostream& operator<< (std::ostream& myStream, const Vector<T>& myVector) {
             for (int i=0; i<myVector._size; ++i)

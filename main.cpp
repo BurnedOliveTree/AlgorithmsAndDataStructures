@@ -5,8 +5,11 @@ using namespace ads;
 
 int main()
 {
-    ads::Queue<int> test;
+    ads::Vector<int> test;
     test.push_back(1);
-    std::cout << test.pop();
+    ads::Vector<int> test2;
+    test2.push_back(1);
+    std::cout << test.compare(test2);
+    std::cout << (test != test2);
     return 0;
 }

@@ -7,7 +7,8 @@ namespace ads {
     template <class T>
     class Queue: public Vector<T> {
     private:
-        /// makes operator[] private since user should not be able to access random elements of queue
+        /// makes at private since user should not be able to access random elements of queue
+        using Vector<T>::at;
         using Vector<T>::operator[];
         /// makes pop_back private since it's a fifo queue
         using Vector<T>::pop_back;
