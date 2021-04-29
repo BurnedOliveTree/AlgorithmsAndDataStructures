@@ -49,6 +49,20 @@ namespace ads {
             else
                 return false;
         }
+        bool compare(const List<T>& myList) const {
+        /// compares this list's content with another given list
+            if (this->_size != myList._size)
+                return false;
+            Node* this_node = this->_head;
+            Node* his_node = myList._head;
+            for (int i=0; i<this->_size; ++i) {
+                if (this_node->data != his_node->data)
+                    return false;
+                this_node = this_node->next;
+                his_node = his_node->next;
+            }
+            return true;
+        }
         T& at(unsigned long index) const {
         /// returns a reference to a desired element of the list
             if (index < 0 || index >= _size) {
@@ -119,6 +133,12 @@ namespace ads {
         }
         T& operator[](unsigned long index) const {
             return this->at(index);
+        }
+        bool operator== (const List<T>& myList) const {
+            return this->compare(myList);
+        }
+        bool operator!= (const List<T>& myList) const {
+            return !this->compare(myList);
         }
         friend std::ostream& operator<< (std::ostream& myStream, const List<T>& myList) {
             Node* node = myList._head;
