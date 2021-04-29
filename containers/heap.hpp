@@ -1,7 +1,7 @@
 #ifndef ads_heapsdontlie_hpp
 #define ads_heapsdontlie_hpp
 
-#include "../math.hpp"
+#include "../algorithms/math.hpp"
 #include "vector.hpp"
 
 namespace ads {

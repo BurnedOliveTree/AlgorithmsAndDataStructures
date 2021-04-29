@@ -1,3 +1,6 @@
+#ifndef ads_sort_hpp
+#define ads_sort_hpp
+
 #include <iostream>
 #include <stdlib.h>
 #include <time.h>
@@ -185,3 +188,5 @@ namespace ads {
         }
     }
 }
+
+#endif /* ads_sort_hpp */

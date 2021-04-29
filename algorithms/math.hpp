@@ -1,3 +1,6 @@
+#ifndef ads_math_hpp
+#define ads_math_hpp
+
 #include <iostream>
 
 #define INF_MIN -2147483648
@@ -372,3 +375,5 @@ namespace ads {
         return n;
     }
 }
+
+#endif /* ads_math_hpp */
