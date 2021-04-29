@@ -51,7 +51,7 @@ namespace ads {
         }
         T& at(unsigned long index) const {
         /// returns a reference to a desired element of the list
-            if (index < 0 || index > _size) {
+            if (index < 0 || index >= _size) {
                 std::ostringstream error_msg;
                 error_msg << "called at(" << index << ") on a list of size " << _size;
                 throw std::out_of_range(error_msg.str());
@@ -99,6 +99,23 @@ namespace ads {
                     elem->prev = new_node;
                 _size++;
             }
+        }
+        void erase(unsigned long index) {
+        /// erases an element from the given index of the list
+            if (index < 0 || index >= _size) {
+                std::ostringstream error_msg;
+                error_msg << "called insert(" << index << ") on a list of size " << _size;
+                throw std::out_of_range(error_msg.str());
+            }
+            Node* elem = this->_head;
+            for (int i = 0; i < index; ++i) {
+                elem = elem->next;
+            }
+            if (index != 0)
+                elem->prev->next = elem->next;
+            if (index != _size - 1)
+                elem->next->prev = elem->prev;
+            delete elem;
         }
         T& operator[](unsigned long index) const {
             return this->at(index);

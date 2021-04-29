@@ -9,10 +9,7 @@ int main()
     test.insert(9, 0);
     test.insert(4, 0);
     test.insert(6, 0);
-    test.insert(5, 0);
-    test.insert(2, 0);
-    test.insert(7, 4);
-    test.insert(8, 0);
+    test.erase(1);
     std::cout << test;
     return 0;
 }
