@@ -1,17 +1,18 @@
-#include "containers/heap.hpp"
+#include "containers/list.hpp"
 #include <iostream>
 
 using namespace ads;
 
 int main()
 {
-    ads::Heap<int> test(2);
-    test.push_back(9);
-    test.push_back(4);
-    test.push_back(10);
-    test.push_back(2);
-    test.push_back(5);
-    test.push_back(1);
+    List<int> test;
+    test.insert(9, 0);
+    test.insert(4, 0);
+    test.insert(6, 0);
+    test.insert(5, 0);
+    test.insert(2, 0);
+    test.insert(7, 4);
+    test.insert(8, 0);
     std::cout << test;
     return 0;
 }
