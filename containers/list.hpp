@@ -2,7 +2,7 @@
 #define ads_list_hpp
 
 #include <sstream>
-#include <iostream>
+#include <ostream>
 
 #include "container.hpp"
 
@@ -99,14 +99,16 @@ namespace ads {
             }
             else {
                 Node* elem = this->_head;
+                Node* prev_elem = nullptr;
                 for (int i = 0; i < index; ++i) {
+                    prev_elem = elem;
                     elem = elem->next;
                 }
-                Node* new_node = new Node(new_element, elem, elem->prev);
+                Node* new_node = new Node(new_element, elem, prev_elem);
                 if (index == 0)
                     _head = new_node;
                 else
-                    elem->prev->next = new_node;
+                    prev_elem->next = new_node;
                 if (index == _size)
                     _tail = new_node;
                 else
@@ -130,6 +132,18 @@ namespace ads {
             if (index != _size - 1)
                 elem->next->prev = elem->prev;
             delete elem;
+        }
+        void assign(T carray[], unsigned long carray_size, unsigned long index=0) {
+        /// assign content of an C array to this list
+            for (int i = 0; i < carray_size; ++i) {
+                this->insert(carray[i], index+i);
+            }
+        }
+        void assign(T value, unsigned long amount, unsigned long index=0) {
+        /// assign *amount* of *value* to this list
+            for (int i = 0; i < amount; ++i) {
+                this->insert(value, index);
+            }
         }
         T& operator[](unsigned long index) const {
             return this->at(index);
