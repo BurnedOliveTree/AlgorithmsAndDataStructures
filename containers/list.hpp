@@ -55,7 +55,7 @@ namespace ads {
                 return false;
             Node* this_node = this->_head;
             Node* his_node = myList._head;
-            for (int i=0; i<this->_size; ++i) {
+            for (unsigned long i=0; i<this->_size; ++i) {
                 if (this_node->data != his_node->data)
                     return false;
                 this_node = this_node->next;
@@ -71,7 +71,7 @@ namespace ads {
                 throw std::out_of_range(error_msg.str());
             }
             Node* elem = this->_head;
-            for (int i = 0; i < index; ++i) {
+            for (unsigned long i = 0; i < index; ++i) {
                 elem = elem->next;
             }
             return elem->data;
@@ -100,7 +100,7 @@ namespace ads {
             else {
                 Node* elem = this->_head;
                 Node* prev_elem = nullptr;
-                for (int i = 0; i < index; ++i) {
+                for (unsigned long i = 0; i < index; ++i) {
                     prev_elem = elem;
                     elem = elem->next;
                 }
@@ -124,7 +124,7 @@ namespace ads {
                 throw std::out_of_range(error_msg.str());
             }
             Node* elem = this->_head;
-            for (int i = 0; i < index; ++i) {
+            for (unsigned long i = 0; i < index; ++i) {
                 elem = elem->next;
             }
             if (index != 0)
@@ -135,13 +135,13 @@ namespace ads {
         }
         void assign(T carray[], unsigned long carray_size, unsigned long index=0) {
         /// assign content of an C array to this list
-            for (int i = 0; i < carray_size; ++i) {
+            for (unsigned long i = 0; i < carray_size; ++i) {
                 this->insert(carray[i], index+i);
             }
         }
         void assign(T value, unsigned long amount, unsigned long index=0) {
         /// assign *amount* of *value* to this list
-            for (int i = 0; i < amount; ++i) {
+            for (unsigned long i = 0; i < amount; ++i) {
                 this->insert(value, index);
             }
         }

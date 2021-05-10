@@ -16,14 +16,14 @@ namespace ads {
             else
                 _max_size /= 2;
             T* temp = new T[_max_size];
-            for (int i=0; i<_size; ++i)
+            for (unsigned long i=0; i<_size; ++i)
                 temp[i] = _data[i];
             delete[] _data;
             _data = temp;
         }
         void moveData() {
         /// moves all the elements by 1 space
-            for (int i=1; i<_size; ++i)
+            for (unsigned long i=1; i<_size; ++i)
                 _data[i-1] = _data[i];
         }
     protected:
@@ -54,7 +54,7 @@ namespace ads {
         /// compares this vector's content with another given vector
             if (this->_size != myVector._size)
                 return false;
-            for (int i=0; i<this->_size; ++i)
+            for (unsigned long i=0; i<this->_size; ++i)
                 if (this->_data[i] != myVector._data[i])
                     return false;
             return true;
