@@ -132,6 +132,7 @@ namespace ads {
             if (index != _size - 1)
                 elem->next->prev = elem->prev;
             delete elem;
+            _size--;
         }
         void assign(T carray[], unsigned long carray_size, unsigned long index=0) {
         /// assign content of an C array to this list
