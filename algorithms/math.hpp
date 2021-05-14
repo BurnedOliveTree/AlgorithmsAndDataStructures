@@ -46,32 +46,35 @@ namespace ads {
         return x;
     }
 
-    int max(int t[], int n)
+    template <class T>
+    T max(T t[], unsigned long n)
     // n is the size of array t
     {
-        int m=-256;
-        for (int i=0; i<n; ++i)
+        T m = INF_MIN;
+        for (unsigned long i=0; i<n; ++i)
             if (t[i] > m)
                 m = t[i];
         return m;
     }
 
-    int min(int t[], int n)
+    template <class T>
+    T min(T t[], unsigned long n)
     // n is the size of array t
     {
-        int m = INF_MIN;
-        for (int i = 0; i < n; ++i)
+        T m = INF_MAX;
+        for (unsigned long i = 0; i < n; ++i)
             if (t[i] < m)
                 m = t[i];
         return m;
     }
 
-    int min_max(int t[], int n, int &M, int &m)
+    template <class T>
+    void min_max(T t[], unsigned long n, T &M, T &m)
     // n is the size of array t
     {
         M = INF_MIN;
         m = INF_MAX;
-        for (int i=0; i<n; i++)
+        for (unsigned long i=0; i<n; i++)
         {
             if (t[i] > M)
                 M = t[i];
@@ -79,7 +82,6 @@ namespace ads {
                 if (t[i] < m)
                     m = t[i];
         }
-        return M;
     }
 
     void factorization(int a, std::ostream& stream=std::cout)
