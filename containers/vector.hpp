@@ -21,10 +21,15 @@ namespace ads {
             delete[] _data;
             _data = temp;
         }
-        void moveData() {
+        void moveData(unsigned long index = 0, bool ascending = true) {
         /// moves all the elements by 1 space
-            for (unsigned long i=1; i<_size; ++i)
-                _data[i-1] = _data[i];
+            if (ascending)
+                for (unsigned long i=index+1; i<_size; ++i)
+                    _data[i-1] = _data[i];
+            else
+                if (_size > 0)
+                    for (unsigned long i=_size; i>index; --i)
+                        _data[i] = _data[i-1];
         }
     protected:
         unsigned long _size;
@@ -76,36 +81,64 @@ namespace ads {
         /// returns a reference to the last element of the vector
             return _data[_size-1];
         }
-        void push_back(T new_element) {
-        /// adds an element at the end of the vector
+        void insert(T new_element, unsigned long index) {
+        /// inserts an element at the given index in the vector
             if (_size == _max_size)
                 changeDataSize(1);
-            _data[_size] = new_element;
+            moveData(index, false);
+            _data[index] = new_element;
             _size++;
+        }
+        void push_front(T new_element) {
+        /// adds an element at the start of the vector
+            this->insert(new_element, 0);
+        }
+        void push_back(T new_element) {
+        /// adds an element at the end of the vector
+            this->insert(new_element, _size);
+        }
+        T erase(unsigned long index) {
+        /// returns and removes the element from a given index of the vector
+            if (empty())
+                throw std::out_of_range("called erase() when vector is empty");
+            T temp = _data[index];
+            moveData(index);
+            _size--;
+            if (_size == _max_size/2)
+                changeDataSize(0);
+            return temp;
         }
         T pop_front() {
         /// returns and removes the first element of the vector
-            if (empty())
-                throw std::out_of_range("called pop() when vector is empty");
-            T temp = _data[0];
-            moveData();
-            _size--;
-            if (_size == _max_size/2)
-                changeDataSize(0);
-            return temp;
+            return this->erase(0);
         }
         T pop_back() {
         /// returns and removes the last element of the vector
-            if (empty())
-                throw std::out_of_range("called pop_back() when vector is empty");
-            T temp = _data[_size-1];
-            _size--;
-            if (_size == _max_size/2)
-                changeDataSize(0);
-            return temp;
+            return this->erase(_size-1);
+        }
+        void clear() {
+        /// erases all elements from the vector
+            for (unsigned long i = _size - 1; i > 0; --i)
+                this->erase(i);
+            this->erase(0);
+        }
+        void assign(T carray[], unsigned long carray_size, unsigned long index=0) {
+        /// assign content of an C array to this vector
+            for (unsigned long i = 0; i < carray_size; ++i) {
+                this->insert(carray[i], index+i);
+            }
+        }
+        void assign(T value, unsigned long amount, unsigned long index=0) {
+        /// assign *amount* of *value* to this vector
+            for (unsigned long i = 0; i < amount; ++i) {
+                this->insert(value, index);
+            }
         }
         T& operator[](unsigned long index) const {
             return this->at(index);
+        }
+        void operator= (const List<T>& myList) const {
+            return this->assign(myList);
         }
         bool operator== (const Vector<T>& myVector) const {
             return this->compare(myVector);

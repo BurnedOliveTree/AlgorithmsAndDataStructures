@@ -177,7 +177,7 @@ namespace ads {
         T& operator[](unsigned long index) const {
             return this->at(index);
         }
-        bool operator= (const List<T>& myList) const {
+        void operator= (const List<T>& myList) const {
             return this->assign(myList);
         }
         bool operator== (const List<T>& myList) const {
