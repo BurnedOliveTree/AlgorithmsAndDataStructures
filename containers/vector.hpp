@@ -73,6 +73,18 @@ namespace ads {
             }
             return _data[index];
         }
+        Vector<T> sub(unsigned long start, unsigned long end) const {
+        /// returns a subvector of a desired range of elements
+            if (start >= _size or end >= _size or start > end) {
+                std::ostringstream error_msg;
+                error_msg << "called sub(" << start << ", " << end << ") on a vector of size " << _size;
+                throw std::out_of_range(error_msg.str());
+            }
+            Vector<T> result;
+            for (unsigned long i = start; i < end; ++i)
+                result.push_back(this->at(i));
+            return result;
+        }
         T& front() const {
         /// returns a reference to the first element of the vector
             return _data[0];
@@ -137,8 +149,8 @@ namespace ads {
         T& operator[](unsigned long index) const {
             return this->at(index);
         }
-        void operator= (const List<T>& myList) const {
-            return this->assign(myList);
+        void operator= (const Vector<T>& myVector) const {
+            return this->assign(myVector);
         }
         bool operator== (const Vector<T>& myVector) const {
             return this->compare(myVector);

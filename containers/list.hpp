@@ -78,6 +78,18 @@ namespace ads {
             }
             return elem->data;
         }
+        List<T> sub(unsigned long start, unsigned long end) const {
+        /// returns a sublist of a desired range of elements
+            if (start >= _size or end >= _size or start > end) {
+                std::ostringstream error_msg;
+                error_msg << "called sub(" << start << ", " << end << ") on a list of size " << _size;
+                throw std::out_of_range(error_msg.str());
+            }
+            List<T> result;
+            for (unsigned long i = start; i < end; ++i)
+                result.push_back(this->at(i));
+            return result;
+        }
         T& front() const {
         /// returns a reference to the first element of the list
             return _head->data;

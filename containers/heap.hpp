@@ -11,6 +11,7 @@ namespace ads {
         using Vector<T>::_size;
         unsigned long _child_amount;  // amount of direct children in a single node
         Heap() {}
+        using Vector<T>::sub;
         using Vector<T>::insert;
         using Vector<T>::push_front;
         using Vector<T>::pop_front;

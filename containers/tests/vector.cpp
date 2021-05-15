@@ -40,3 +40,10 @@ TEST_CASE("vector-compare", "[container][vector][compare]") {
     test2.push_back(2);
     REQUIRE(test.compare(test2));
 }
+
+TEST_CASE("vector-sub", "[container][vector][sub]") {
+    ads::Vector<int> test;
+    int c[3] = {1, 2, 3};
+    test.assign(c, 3);
+    REQUIRE(test.sub(1, 2)[0] == c[1]);
+}

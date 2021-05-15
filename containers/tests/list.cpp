@@ -14,6 +14,13 @@ TEST_CASE("list-compare", "[container][list][compare]") {
     REQUIRE(test == test2);
 }
 
+TEST_CASE("list-sub", "[container][list][sub]") {
+    ads::List<int> test;
+    int c[3] = {1, 2, 3};
+    test.assign(c, 3);
+    REQUIRE(test.sub(1, 2)[0] == c[1]);
+}
+
 TEST_CASE("list-assign", "[container][list][assign]") {
     ads::List<int> test;
     int c[3] = {2, 4, 6};
