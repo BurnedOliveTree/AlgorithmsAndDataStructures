@@ -36,3 +36,11 @@ TEST_CASE("list-erase", "[container][list][erase]") {
     REQUIRE(test[1] == c[2]);
     REQUIRE(test.size() == 2);
 }
+
+TEST_CASE("list-clear", "[container][list][clear]") {
+    ads::List<int> test;
+    int c[3] = {2, 4, 6};
+    test.assign(c, 3);
+    test.clear();
+    REQUIRE(test.size() == 0);
+}

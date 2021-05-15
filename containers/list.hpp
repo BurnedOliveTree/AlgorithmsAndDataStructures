@@ -32,11 +32,13 @@ namespace ads {
         };
         ~List() {
             Node* node = this->_head;
-            while (node->next) {
-                node = node->next;
-                delete node->prev;
+            if (node) {
+                while (node->next) {
+                    node = node->next;
+                    delete node->prev;
+                }
+                delete node;
             }
-            delete node;
         };
         unsigned long size() const {
         /// returns amount of elements in list
@@ -129,10 +131,20 @@ namespace ads {
             }
             if (index != 0)
                 elem->prev->next = elem->next;
+            else
+                this->_head = elem->next;
             if (index != _size - 1)
                 elem->next->prev = elem->prev;
+            else
+                this->_tail = elem->prev;
             delete elem;
             _size--;
+        }
+        void clear() {
+        /// erases all elements from the list
+            for (unsigned long i = _size - 1; i > 0; --i)
+                this->erase(i);
+            this->erase(0);
         }
         void assign(T carray[], unsigned long carray_size, unsigned long index=0) {
         /// assign content of an C array to this list
@@ -148,6 +160,9 @@ namespace ads {
         }
         T& operator[](unsigned long index) const {
             return this->at(index);
+        }
+        bool operator= (const List<T>& myList) const {
+            return this->assign(myList);
         }
         bool operator== (const List<T>& myList) const {
             return this->compare(myList);
