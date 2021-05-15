@@ -118,6 +118,14 @@ namespace ads {
                 _size++;
             }
         }
+        void push_front(T new_element) {
+        /// inserts an element at the start of the list
+            this->insert(new_element, 0);
+        }
+        void push_back(T new_element) {
+        /// inserts an element at the end of the list
+            this->insert(new_element, _size);
+        }
         void erase(unsigned long index) {
         /// erases an element from the given index of the list
             if (index < 0 || index >= _size) {
@@ -139,6 +147,14 @@ namespace ads {
                 this->_tail = elem->prev;
             delete elem;
             _size--;
+        }
+        void pop_front() {
+        /// erases an element from the start of the list
+            this->erase(0);
+        }
+        void pop_back() {
+        /// erases an element from the end of the list
+            this->insert(_size - 1);
         }
         void clear() {
         /// erases all elements from the list
